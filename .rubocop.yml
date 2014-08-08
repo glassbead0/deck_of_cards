@@ -1,0 +1,42 @@
+# inherit_from: /Users/glassbead/.rvm/gems/ruby-2.1.2/gems/rubocop-0.23.0/config/default.yml
+
+Style/LineLength:
+  Max: 100
+
+Style/GuardClause:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+Style/FormatString:
+  EnforcedStyle: percent
+  SupportedStyles:
+    - format
+    - sprintf
+    - percent
+
+Style/LineEndConcatenation:
+  Enabled: false
+
+Style/CyclomaticComplexity:
+  Max: 8
+
+Style/Documentation:
+  Enabled: false
+
+Style/MethodLength:
+  CountComments: false
+  Max: 15
+
+Lint/ParenthesesAsGroupedExpression:
+  Description: >-
+                  Checks for method calls with a space before the opening parenthesis.
+  Enabled: false
+
+Style/TrivialAccessors:
+  Description: 'prefer attr_* methods to trivial readers/writers'
+  Enabled: false
