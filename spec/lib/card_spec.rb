@@ -1,37 +1,61 @@
 require 'rspec'
 require './lib/card'
+
 describe Card do
+  subject { Card.new(card_suit, value) }
+  let(:card_suit) { 'diamond' }
+  let(:value) { 7 }
+
   it 'should be a card' do
-    expect(Card.new('heart', 12)).to be_a(Card)
+    expect(subject).to be_a(Card)
   end
 
-  describe 'properties of the card' do
-    subject { Card.new('diamond', 7) }
-    it 'should have a suit and a value' do
-      expect(subject.suit).to eq('diamond')
-      expect(subject.value).to eq(7)
+  describe '#suit' do
+    context 'diamond' do
+      it 'should have a suit' do
+        expect(subject.suit).to eq('diamond')
+      end
     end
 
-    it 'should reject invalid suits' do
-      expect { Card.new('potato', 7) }.to raise_error
+    context 'invalid suits' do
+      let(:card_suit) { 'potato' }
+      it 'should reject invalid suits' do
+        expect { subject }.to raise_error
+      end
+    end
+  end
+
+  describe '#value' do
+    context 'has a value' do
+      let(:suit) { 'diamonds' }
+      let(:value) { 2 }
+      it 'should have a value' do
+        expect(subject.value).to eq(2)
+      end
     end
 
-    it 'sholuld reject invalid numbers' do
-      expect { Card.new('spade', 20) }.to raise_error
+    context 'invalid numbers' do
+      let(:value) { 20 }
+      it 'should reject invalid numbers' do
+        expect { subject }.to raise_error
+      end
+      it 'should translate 1 to A and translate face cards to J, Q and K' do
+        expect(Card.new('club', 1).value).to eq('A')
+        expect(Card.new('club', 11).value).to eq('J')
+        expect(Card.new('club', 12).value).to eq('Q')
+        expect(Card.new('club', 13).value).to eq('K')
+      end
     end
+  end
 
-    it 'should translate 1 to A and translate face cards to J, Q and K' do
-      expect(Card.new('club', 1).value).to eq('A')
-      expect(Card.new('club', 11).value).to eq('J')
-      expect(Card.new('club', 12).value).to eq('Q')
-      expect(Card.new('club', 13).value).to eq('K')
-    end
+  describe 'card methods' do
 
     it 'should be face down by default' do
       expect(subject.face_up).to eq(false)
     end
 
-    subject { Card.new('diamond', 7) }
+    let(:card_suit) { 'diamond' }
+    let(:value) { 7 }
     it 'should have a flip method' do
       subject.flip
       expect(subject.face_up).to eq(true)

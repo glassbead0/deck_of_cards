@@ -5,9 +5,9 @@ class Deck
     @cards = []
     13.times do |value|
       @cards << Card.new('spade', value + 1)
-      @cards << Card.new('heart', value + 1)
-      @cards << Card.new('club', value + 1)
       @cards << Card.new('diamond', value + 1)
+      @cards << Card.new('club', value + 1)
+      @cards << Card.new('heart', value + 1)
     end
   end
 
@@ -23,6 +23,10 @@ class Deck
       end
     end
     @cards = @shuffled_cards
+  end
+
+  def perfect_shuffle
+    
   end
 
   def pick_random_card
