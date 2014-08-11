@@ -47,9 +47,3 @@ class Deck
     @cards[rand(0..51)]
   end
 end
-
-# how do I actually do something like this in ruby?
-((0..25) && (26..51)).each do |a, b|
-  # a will loop through 0..25
-  # b will loop through 26..51 simultaneously
-end
