@@ -2,8 +2,8 @@ require 'rspec'
 require './lib/card'
 
 describe Card do
-  subject { Card.new(card_suit, value) }
-  let(:card_suit) { 'diamond' }
+  subject { Card.new(value, card_suit) }
+  let(:card_suit) { :♦ }
   let(:value) { 7 }
 
   it 'should be a card' do
@@ -13,7 +13,7 @@ describe Card do
   describe '#suit' do
     context 'diamond' do
       it 'should have a suit' do
-        expect(subject.suit).to eq('diamond')
+        expect(subject.suit).to eq(:♦)
       end
     end
 
@@ -27,7 +27,7 @@ describe Card do
 
   describe '#value' do
     context 'has a value' do
-      let(:suit) { 'diamonds' }
+      let(:suit) { :♦ }
       let(:value) { 2 }
       it 'should have a value' do
         expect(subject.value).to eq(2)
@@ -40,10 +40,10 @@ describe Card do
         expect { subject }.to raise_error
       end
       it 'should translate 1 to A and translate face cards to J, Q and K' do
-        expect(Card.new('club', 1).value).to eq('A')
-        expect(Card.new('club', 11).value).to eq('J')
-        expect(Card.new('club', 12).value).to eq('Q')
-        expect(Card.new('club', 13).value).to eq('K')
+        expect(Card.new(1, :♣).value).to eq(:A)
+        expect(Card.new(11, :♣).value).to eq(:J)
+        expect(Card.new(12, :♣).value).to eq(:Q)
+        expect(Card.new(13, :♣).value).to eq(:K)
       end
     end
   end
@@ -54,7 +54,7 @@ describe Card do
       expect(subject.face_up).to eq(false)
     end
 
-    let(:card_suit) { 'diamond' }
+    let(:card_suit) { :♦ }
     let(:value) { 7 }
     it 'should have a flip method' do
       subject.flip
