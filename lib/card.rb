@@ -9,7 +9,7 @@ class Card
     @face_up = false
   end
 
-  def get_suit(suit)
+  def get_suit(suit) # gets the suit, but rejects invalid suits
     if [:♠, :♦, :♣, :♥].include?(suit)
       @suit = suit
     else
@@ -17,14 +17,14 @@ class Card
     end
   end
 
-  def get_value(value)
+  def get_value(value) # gets the value, but rejects invalid values.
     @value = value
     @value = :A if value == 1
     @value = :J if value == 11
     @value = :Q if value == 12
     @value = :K if value == 13
     if value < 1 || value > 13
-      fail(ArgumentError, 'not a valid number')
+      fail(ArgumentError, 'not a valid value for a card')
     end
   end
 
