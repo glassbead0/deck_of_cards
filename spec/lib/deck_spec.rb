@@ -38,7 +38,7 @@ describe Deck do
       it 'should not be the same as pre shuffled' do
         unshuffled_deck = subject.cards
         shuffled_deck = subject.shuffle
-        expect(unshuffled_deck == shuffled_deck).to eq(false)
+        expect(unshuffled_deck).to_not eq(shuffled_deck)
       end
     end
 

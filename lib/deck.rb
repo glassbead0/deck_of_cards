@@ -11,17 +11,14 @@ class Deck
   end
 
   def shuffle # returns the @cards in random order
-    @shuffled_cards = []
-    @cards.each do |card|
-      loop do
-        random_num = rand(0..51)
-        if @shuffled_cards[random_num].nil?
-          @shuffled_cards[random_num] = card
-          break
-        end
-      end
+    @old_deck = @cards
+    @new_deck = []
+    52.times do |a|
+      rand = rand(@old_deck.length)
+      @new_deck[a] = @old_deck[rand]
+      @old_deck.delete_at(rand)
     end
-    @cards = @shuffled_cards
+    @cards = @new_deck
   end
 
   def show_order # shows the current order of the cards in a more readable format
